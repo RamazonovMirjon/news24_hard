@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:news24/widgets/my_text_form_fild.dart';
 
-class SignInFirst extends StatefulWidget {
-  SignInFirst({Key? key}) : super(key: key);
-
+class GmailPage extends StatefulWidget {
   @override
-  State<SignInFirst> createState() => _SignInFirstState();
+  State<GmailPage> createState() => _GmailPageState();
 }
 
-class _SignInFirstState extends State<SignInFirst> {
+class _GmailPageState extends State<GmailPage> {
   final _formkey = GlobalKey<FormState>();
 
   Icon icon = const Icon(Icons.remove_red_eye_outlined);
+
   bool passwordBoll = true, iconboll = true;
   String signUpBotton = "";
-
   final TextEditingController _controller1 = TextEditingController();
   final TextEditingController _controller2 = TextEditingController();
   final TextEditingController _controller3 = TextEditingController();
@@ -76,13 +74,26 @@ class _SignInFirstState extends State<SignInFirst> {
                 ],
               ),
             ),
-            const SizedBox(height: 50),
+            Padding(
+              padding: const EdgeInsets.only(right: 40, top: 10),
+              child: SizedBox(
+                height: 50,
+                width: double.infinity,
+                child: Align(
+                  alignment: Alignment.topRight,
+                  child: InkWell(
+                    child: const Text("Forgot password"),
+                    onTap: () {},
+                  ),
+                ),
+              ),
+            ),
             Container(
               height: 60,
               padding:
                   const EdgeInsets.symmetric(horizontal: 100, vertical: 10),
               child: ElevatedButton(
-                child: const Text("Sign Up"),
+                child: const Text("Sign In"),
                 style: ElevatedButton.styleFrom(
                     primary: Colors.black,
                     shape: RoundedRectangleBorder(
@@ -96,38 +107,13 @@ class _SignInFirstState extends State<SignInFirst> {
                       },
               ),
             ),
-            Center(
-              child: Stack(
-                children: [
-                  const Image(
-                      image: AssetImage("assets/images/signInOptions.png")),
-                  Positioned(
-                      left: 0,
-                      bottom: 0,
-                      child: InkWell(
-                        child: const SizedBox(
-                          height: 45,
-                          width: 45,
-                        ),
-                        onTap: () {
-                          Navigator.pushNamed(context, "/singin2");
-                        },
-                      ))
-                ],
-              ),
+            const Center(
+              child:
+                  Image(image: AssetImage("assets/images/signInOptions1.png")),
             ),
             const SizedBox(height: 20),
             const Center(
-              child: Text("By signing up to News24 you are accepting our"),
-            ),
-            Center(
-              child: InkWell(
-                child: const Text(
-                  "Terms & Conditions",
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                onTap: () {},
-              ),
+              child: Text("Don’t have an account? Register"),
             ),
           ],
         ),
