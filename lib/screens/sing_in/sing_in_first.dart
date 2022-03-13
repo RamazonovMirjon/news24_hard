@@ -9,20 +9,19 @@ class SignInFirst extends StatefulWidget {
 }
 
 class _SignInFirstState extends State<SignInFirst> {
-  final _formkey = GlobalKey<FormState>();
-
-  Icon icon = const Icon(Icons.remove_red_eye_outlined);
   bool passwordBoll = true, iconboll = true;
-
+  final _formkey = GlobalKey<FormState>();
   final TextEditingController _controller1 = TextEditingController();
   final TextEditingController _controller2 = TextEditingController();
   final TextEditingController _controller3 = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
-      resizeToAvoidBottomInset: false,
+    return SafeArea(child: _method(context));
+  }
+
+  Scaffold _method(BuildContext context) {
+    return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -32,69 +31,9 @@ class _SignInFirstState extends State<SignInFirst> {
               height: 200,
               child: Image.asset("assets/images/title.png"),
             ),
-            Form(
-              key: _formkey,
-              child: Column(
-                children: [
-                  MyTextFormFild(text: "Username", controller: _controller1),
-                  MyTextFormFild(text: "Email", controller: _controller2),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 40),
-                    child: TextFormField(
-                      controller: _controller3,
-                      keyboardType: TextInputType.name,
-                      textInputAction: TextInputAction.go,
-                      decoration: InputDecoration(
-                          hintText: "Password",
-                          labelText: "Password",
-                          suffix: InkWell(
-                            child: iconboll
-                                ? const Icon(Icons.remove_red_eye_outlined)
-                                : const Icon(Icons.password_outlined),
-                            onTap: () {
-                              setState(() {
-                                passwordBoll = !passwordBoll;
-                                iconboll = !iconboll;
-                              });
-                            },
-                          )),
-                      obscureText: passwordBoll,
-                      onChanged: (input) {
-                        setState(() {
-                          _controller3;
-                        });
-                        print("Qidiruv tizimi: $input");
-                      },
-                      onTap: () {},
-                      validator: (input) {
-                        if (input!.length < 6)
-                          return "Parol 6 tadan ko'p bo'lishi kerak";
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            _textFormFildsMethod,
             const SizedBox(height: 50),
-            Container(
-              height: 60,
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 100, vertical: 10),
-              child: ElevatedButton(
-                child: const Text("Sign Up"),
-                style: ElevatedButton.styleFrom(
-                    primary: Colors.black,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20))),
-                onPressed: _controller3.text.isEmpty
-                    ? null
-                    : () {
-                        if (_formkey.currentState!.validate()) {
-                          print("KEyingi sahifaga utdi");
-                        }
-                      },
-              ),
-            ),
+            _buttomMethod,
             Center(
               child: Stack(
                 children: [
@@ -131,6 +70,74 @@ class _SignInFirstState extends State<SignInFirst> {
           ],
         ),
       ),
-    ));
+    );
+  }
+
+  Container get _buttomMethod {
+    return Container(
+      height: 60,
+      padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 10),
+      child: ElevatedButton(
+        child: const Text("Sign Up"),
+        style: ElevatedButton.styleFrom(
+            primary: Colors.black,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20))),
+        onPressed: _controller3.text.isEmpty
+            ? null
+            : () {
+                if (_formkey.currentState!.validate()) {
+                  //! print("Keyingi sahifaga utdi");
+                }
+              },
+      ),
+    );
+  }
+
+  Form get _textFormFildsMethod {
+    return Form(
+      key: _formkey,
+      child: Column(
+        children: [
+          MyTextFormFild(text: "Username", controller: _controller1),
+          MyTextFormFild(text: "Email", controller: _controller2),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 40),
+            child: TextFormField(
+              controller: _controller3,
+              keyboardType: TextInputType.name,
+              textInputAction: TextInputAction.go,
+              decoration: InputDecoration(
+                  hintText: "Password",
+                  labelText: "Password",
+                  suffix: InkWell(
+                    child: iconboll
+                        ? const Icon(Icons.remove_red_eye_outlined)
+                        : const Icon(Icons.password_outlined),
+                    onTap: () {
+                      setState(() {
+                        passwordBoll = !passwordBoll;
+                        iconboll = !iconboll;
+                      });
+                    },
+                  )),
+              obscureText: passwordBoll,
+              onChanged: (input) {
+                setState(() {
+                  _controller3;
+                });
+                //! print("Qidiruv tizimi: $input");
+              },
+              onTap: () {},
+              validator: (input) {
+                if (input!.length < 6) {
+                  return "Parol 6 tadan ko'p bo'lishi kerak";
+                }
+              },
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
