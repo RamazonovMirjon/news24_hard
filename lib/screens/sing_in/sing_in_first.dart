@@ -13,7 +13,6 @@ class _SignInFirstState extends State<SignInFirst> {
 
   Icon icon = const Icon(Icons.remove_red_eye_outlined);
   bool passwordBoll = true, iconboll = true;
-  String signUpBotton = "";
 
   final TextEditingController _controller1 = TextEditingController();
   final TextEditingController _controller2 = TextEditingController();
@@ -62,7 +61,7 @@ class _SignInFirstState extends State<SignInFirst> {
                       obscureText: passwordBoll,
                       onChanged: (input) {
                         setState(() {
-                          signUpBotton = input;
+                          _controller3;
                         });
                         print("Qidiruv tizimi: $input");
                       },
@@ -87,7 +86,7 @@ class _SignInFirstState extends State<SignInFirst> {
                     primary: Colors.black,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20))),
-                onPressed: signUpBotton.isEmpty
+                onPressed: _controller3.text.isEmpty
                     ? null
                     : () {
                         if (_formkey.currentState!.validate()) {

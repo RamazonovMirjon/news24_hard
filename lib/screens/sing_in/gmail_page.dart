@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:news24/widgets/my_text_form_fild.dart';
 
 class GmailPage extends StatefulWidget {
+  const GmailPage({Key? key}) : super(key: key);
+
   @override
   State<GmailPage> createState() => _GmailPageState();
 }
@@ -12,7 +14,6 @@ class _GmailPageState extends State<GmailPage> {
   Icon icon = const Icon(Icons.remove_red_eye_outlined);
 
   bool passwordBoll = true, iconboll = true;
-  String signUpBotton = "";
   final TextEditingController _controller1 = TextEditingController();
   final TextEditingController _controller2 = TextEditingController();
   final TextEditingController _controller3 = TextEditingController();
@@ -60,7 +61,7 @@ class _GmailPageState extends State<GmailPage> {
                       obscureText: passwordBoll,
                       onChanged: (input) {
                         setState(() {
-                          signUpBotton = input;
+                          _controller3;
                         });
                         print("Qidiruv tizimi: $input");
                       },
@@ -83,7 +84,9 @@ class _GmailPageState extends State<GmailPage> {
                   alignment: Alignment.topRight,
                   child: InkWell(
                     child: const Text("Forgot password"),
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pushNamed(context, "/singin3");
+                    },
                   ),
                 ),
               ),
@@ -98,11 +101,11 @@ class _GmailPageState extends State<GmailPage> {
                     primary: Colors.black,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20))),
-                onPressed: signUpBotton.isEmpty
+                onPressed: _controller3.text.isEmpty
                     ? null
                     : () {
                         if (_formkey.currentState!.validate()) {
-                          print("KEyingi sahifaga utdi");
+                          print("Keyingi sahifaga utdi");
                         }
                       },
               ),
