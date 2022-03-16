@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:news24/widgets/my_text_form_fild.dart';
 
 class SignInFirst extends StatefulWidget {
-  SignInFirst({Key? key}) : super(key: key);
+  const SignInFirst({Key? key}) : super(key: key);
 
   @override
   State<SignInFirst> createState() => _SignInFirstState();
@@ -31,7 +31,7 @@ class _SignInFirstState extends State<SignInFirst> {
               height: 200,
               child: Image.asset("assets/images/title.png"),
             ),
-            _textFormFildsMethod,
+            _formMethod,
             const SizedBox(height: 50),
             _buttomMethod,
             Center(
@@ -94,7 +94,7 @@ class _SignInFirstState extends State<SignInFirst> {
     );
   }
 
-  Form get _textFormFildsMethod {
+  Form get _formMethod {
     return Form(
       key: _formkey,
       child: Column(

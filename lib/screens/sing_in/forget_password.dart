@@ -11,6 +11,8 @@ class _ForgetPasswordState extends State<ForgetPassword> {
   final _formkey = GlobalKey<FormState>();
   final TextEditingController _controller = TextEditingController();
 
+  bool check = true, autofocus = false;
+
   @override
   Widget build(BuildContext context) {
     return _method();
@@ -34,6 +36,20 @@ class _ForgetPasswordState extends State<ForgetPassword> {
             ),
             _formMethod,
             _buttomMethod,
+            Center(
+              child: check
+                  ? null
+                  : Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Text("Didn’t receive an email? "),
+                        Text(
+                          "Re-send",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+            )
           ],
         ),
       ),
@@ -51,6 +67,8 @@ class _ForgetPasswordState extends State<ForgetPassword> {
               controller: _controller,
               keyboardType: TextInputType.name,
               textInputAction: TextInputAction.go,
+              showCursor: autofocus,
+            
               decoration: const InputDecoration(
                 hintText: "Email",
                 labelText: "Email",
@@ -79,7 +97,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
     return Container(
       height: 60,
       padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 10),
-      margin: const EdgeInsets.symmetric(vertical: 50),
+      margin: const EdgeInsets.only(top: 40, bottom: 20),
       child: ElevatedButton(
         child: const Text("Reset"),
         style: ElevatedButton.styleFrom(
@@ -91,6 +109,11 @@ class _ForgetPasswordState extends State<ForgetPassword> {
             : () {
                 if (_formkey.currentState!.validate()) {
                   //! print("Keyingi sahifaga utdi");
+                  setState(() {
+                    _controller.clear();
+                    check = false;
+                   
+                  });
                 }
               },
       ),
