@@ -21,37 +21,58 @@ class _ForgetPasswordState extends State<ForgetPassword> {
   SafeArea _method() {
     return SafeArea(
         child: Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            SizedBox(
-              height: 200,
-              child: Image.asset("assets/images/title.png"),
-            ),
-            const Padding(
-              padding: EdgeInsets.all(40),
-              child: Text("Enter your email to be sent a reset password link."),
-            ),
-            _formMethod,
-            _buttomMethod,
-            Center(
-              child: check
-                  ? null
-                  : Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Text("Didn’t receive an email? "),
-                        Text(
-                          "Re-send",
-                          style: TextStyle(fontWeight: FontWeight.bold),
+      resizeToAvoidBottomInset: false,
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          SizedBox(
+            height: 200,
+            child: Image.asset("assets/images/title.png"),
+          ),
+          const Padding(
+            padding: EdgeInsets.all(40),
+            child: Text("Enter your email to be sent a reset password link."),
+          ),
+          _formMethod,
+          _buttomMethod,
+          Expanded(
+              child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
+            child: check
+                ? null
+                : Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          Text("Didn’t receive an email? "),
+                          Text(
+                            "Re-send",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
+                      Container(
+                        height: 60,
+                        alignment: Alignment.center,
+                        child: const Text(
+                          'Email sent. Please check your email to reset\n your password',
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                          textAlign: TextAlign.center,
                         ),
-                      ],
-                    ),
-            )
-          ],
-        ),
+                        decoration: const BoxDecoration(
+                            color: Colors.black,
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(30))),
+                      ),
+                    ],
+                  ),
+          )),
+        ],
       ),
     ));
   }
@@ -65,10 +86,9 @@ class _ForgetPasswordState extends State<ForgetPassword> {
             padding: const EdgeInsets.symmetric(horizontal: 40),
             child: TextFormField(
               controller: _controller,
-              keyboardType: TextInputType.name,
+              keyboardType: TextInputType.emailAddress,
               textInputAction: TextInputAction.go,
               showCursor: autofocus,
-            
               decoration: const InputDecoration(
                 hintText: "Email",
                 labelText: "Email",
@@ -112,7 +132,6 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                   setState(() {
                     _controller.clear();
                     check = false;
-                   
                   });
                 }
               },
