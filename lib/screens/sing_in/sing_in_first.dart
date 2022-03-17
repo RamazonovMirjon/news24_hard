@@ -22,6 +22,8 @@ class _SignInFirstState extends State<SignInFirst> {
 
   Scaffold _method(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
+
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -64,7 +66,9 @@ class _SignInFirstState extends State<SignInFirst> {
                   "Terms & Conditions",
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushNamed(context, "/terms");
+                },
               ),
             ),
           ],
@@ -88,6 +92,8 @@ class _SignInFirstState extends State<SignInFirst> {
             : () {
                 if (_formkey.currentState!.validate()) {
                   //! print("Keyingi sahifaga utdi");
+                  Navigator.pushNamed(context, "/interest");
+                  
                 }
               },
       ),

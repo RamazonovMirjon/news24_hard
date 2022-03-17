@@ -55,8 +55,11 @@ class _GmailPageState extends State<GmailPage> {
                     image: AssetImage("assets/images/signInOptions1.png")),
               ),
               const SizedBox(height: 20),
-              const Center(
-                child: Text("Don’t have an account? Register"),
+               Center(
+                child: InkWell(
+                  onTap: ()=> Navigator.pushNamed(context, "/singin1"),
+                  child: const Text("Don’t have an account? Register"),
+                ),
               ),
             ],
           ),
